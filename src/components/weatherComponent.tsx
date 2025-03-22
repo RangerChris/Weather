@@ -77,7 +77,7 @@ interface WeatherContextType {
   weatherData: WeatherData | null;
   loading: boolean;
   error: string | null;
-  refreshWeather: (city: string) => Promise<void>;
+  refreshWeather: () => Promise<void>;
 }
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined);
