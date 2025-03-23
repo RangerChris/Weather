@@ -12,18 +12,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install dependencies
         run: npm ci
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y libgconf-2-4 libnss3 libxss1 libasound2 libatk1.0-0 libatk-bridge2.0-0 libx264-dev libgles2-mesa
-      - name: Install Playwright
-        run: npx playwright install
+
+      - name: Install Playwright browsers and system dependencies
+        run: |
+          # Install Playwright with all browsers
+          npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npx playwright test
+
       - name: Upload Playwright report as artifact
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
@@ -31,6 +36,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
       - name: Build the application and deploy to GitHub Pages
         run: npm run gh-pages-deploy
 
@@ -40,6 +46,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         run: npx gh-pages -d dist
