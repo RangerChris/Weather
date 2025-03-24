@@ -355,12 +355,12 @@ const WeatherDisplay = () => {
           <div>
             <div className="mb-4">
               <div
-                className={`alert ${
+                className={`alert bg-gradient-to-r ${
                   airQualityIndex <= 1
-                    ? "alert-success"
+                    ? "from-success to-success-dark"
                     : airQualityIndex <= 3
-                    ? "alert-warning"
-                    : "alert-error"
+                    ? "from-warning to-warning-dark"
+                    : "from-error to-error-dark"
                 }`}
               >
                 <svg
@@ -425,7 +425,10 @@ const WeatherDisplay = () => {
                   desc: "SO₂",
                 },
               ].map((pollutant, index) => (
-                <div key={index} className="stat bg-base-200 rounded-box p-4">
+                <div
+                  key={index}
+                  className="stat rounded-box p-4 shadow-lg bg-gradient-to-r from-white to-gray-200"
+                >
                   <div className="stat-title">{pollutant.name}</div>
                   <div className="stat-value text-2xl">
                     {pollutant.value.toFixed(1)}
