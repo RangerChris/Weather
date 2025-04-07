@@ -1,7 +1,7 @@
 const HeaderComponent: React.FC = () => {
   return (
     <>
-      <ul className="menu menu-horizontal bg-base-200 justify-center w-full">
+      <ul className="menu menu-horizontal bg-neutral text-neutral-content justify-center w-full">
         <li>
           <a href="/">Home</a>
         </li>

@@ -102,8 +102,7 @@ const WeatherDisplay = () => {
 
   return (
     <div className="card w-full bg-base-100 shadow-xl overflow-hidden">
-      {/* Header with weather condition and temperature */}
-      <div className="bg-gradient-to-r from-primary to-secondary text-white p-6">
+      <div className="bg-gradient-to-r from-neutral to-secondary text-white p-6">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-3xl font-bold">{location.name}</h2>
@@ -437,13 +436,7 @@ const WeatherDisplay = () => {
                     {pollutant.unit} - {pollutant.desc}
                   </div>
                   <progress
-                    className={`progress w-full mt-2 ${
-                      index === 0 && pollutant.value < 10
-                        ? "progress-success"
-                        : index === 0 && pollutant.value < 25
-                        ? "progress-warning"
-                        : "progress-error"
-                    }`}
+                    className={`progress w-full mt-2 progress-accent`}
                     value={
                       index === 0
                         ? Math.min(100, (pollutant.value / 50) * 100) // PM2.5
@@ -465,13 +458,9 @@ const WeatherDisplay = () => {
           </div>
         )}
 
-        {/* Footer with last updated info and refresh button */}
         <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
           <span>Last updated: {formattedTime}</span>
-          <button
-            onClick={() => refreshWeather()}
-            className="btn btn-sm btn-primary"
-          >
+          <button onClick={() => refreshWeather()} className="btn btn-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 mr-1"
