@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useWeather } from "./weatherComponent";
+import { useWeather } from "../hooks/useWeather";
 
 const WeatherDisplay = () => {
   const { weatherData, loading, error, refreshWeather } = useWeather();
@@ -192,14 +192,14 @@ const WeatherDisplay = () => {
                 {current.uv === 0
                   ? "Low"
                   : current.uv < 3
-                  ? "Low"
-                  : current.uv < 6
-                  ? "Moderate"
-                  : current.uv < 8
-                  ? "High"
-                  : current.uv < 11
-                  ? "Very High"
-                  : "Extreme"}
+                    ? "Low"
+                    : current.uv < 6
+                      ? "Moderate"
+                      : current.uv < 8
+                        ? "High"
+                        : current.uv < 11
+                          ? "Very High"
+                          : "Extreme"}
               </div>
             </div>
 
@@ -222,8 +222,8 @@ const WeatherDisplay = () => {
                 {current.cloud < 30
                   ? "Clear"
                   : current.cloud < 70
-                  ? "Partly cloudy"
-                  : "Overcast"}
+                    ? "Partly cloudy"
+                    : "Overcast"}
               </div>
             </div>
 
@@ -354,13 +354,12 @@ const WeatherDisplay = () => {
           <div>
             <div className="mb-4">
               <div
-                className={`alert bg-gradient-to-r ${
-                  airQualityIndex <= 1
+                className={`alert bg-gradient-to-r ${airQualityIndex <= 1
                     ? "from-success to-success-dark"
                     : airQualityIndex <= 3
-                    ? "from-warning to-warning-dark"
-                    : "from-error to-error-dark"
-                }`}
+                      ? "from-warning to-warning-dark"
+                      : "from-error to-error-dark"
+                  }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -441,14 +440,14 @@ const WeatherDisplay = () => {
                       index === 0
                         ? Math.min(100, (pollutant.value / 50) * 100) // PM2.5
                         : index === 1
-                        ? Math.min(100, (pollutant.value / 100) * 100) // PM10
-                        : index === 2
-                        ? Math.min(100, (pollutant.value / 4000) * 100) // CO
-                        : index === 3
-                        ? Math.min(100, (pollutant.value / 40) * 100) // NO2
-                        : index === 4
-                        ? Math.min(100, (pollutant.value / 100) * 100) // O3
-                        : Math.min(100, (pollutant.value / 40) * 100) // SO2
+                          ? Math.min(100, (pollutant.value / 100) * 100) // PM10
+                          : index === 2
+                            ? Math.min(100, (pollutant.value / 4000) * 100) // CO
+                            : index === 3
+                              ? Math.min(100, (pollutant.value / 40) * 100) // NO2
+                              : index === 4
+                                ? Math.min(100, (pollutant.value / 100) * 100) // O3
+                                : Math.min(100, (pollutant.value / 40) * 100) // SO2
                     }
                     max="100"
                   ></progress>
